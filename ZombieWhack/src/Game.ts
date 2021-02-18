@@ -94,9 +94,6 @@ function onTick(e:createjs.Event):void {
     // TESTING FPS
     document.getElementById("fps").innerHTML = String(createjs.Ticker.getMeasuredFPS());
 
-    // this is the game loop
-    // ...
-
     // update the stage!
     stage.update();
 }

@@ -10202,8 +10202,8 @@ class Zombie {
     constructor(stage, spriteSheet) {
         this._click = 0;
         this.sprite = new createjs.Sprite(spriteSheet);
+        this.whack = new createjs.Sprite(spriteSheet);
         this.stage = stage;
-        this.spritesheet = spriteSheet;
         this.sprite.gotoAndStop("spritesheets/ZombieAlive");
         this.sprite.x = 400;
         this.sprite.y = 400;
@@ -10214,7 +10214,6 @@ class Zombie {
         this._click++;
         let mouseX = this.stage.mouseX;
         let mouseY = this.stage.mouseY;
-        this.whack = new createjs.Sprite(this.spritesheet);
         this.whack.gotoAndStop("spritesheets/Whack");
         if (this._click >= 4) {
             e.remove();
@@ -10235,6 +10234,7 @@ class Zombie {
             this.stage.addChild(this.whack);
             createjs.Tween.get(this.whack, { useTicks: true }).to({ alpha: 0 }, 10).call(() => {
                 this.stage.removeChild(this.whack);
+                createjs.Tween.get(this.whack, { useTicks: true }).to({ alpha: 1 }, 0);
             });
             if (this._click == 1) {
                 this.sprite.gotoAndStop("spritesheets/ZombieInjured");

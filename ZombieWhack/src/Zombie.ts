@@ -5,15 +5,15 @@ export default class Zombie {
 
     private sprite:createjs.Sprite;
     private whack:createjs.Sprite;
-    private spritesheet:createjs.SpriteSheet;
     private stage:createjs.StageGL;
 
     constructor(stage:createjs.StageGL, spriteSheet:createjs.SpriteSheet)
     {
         this._click = 0;
         this.sprite = new createjs.Sprite(spriteSheet);
+        this.whack =  new createjs.Sprite(spriteSheet);
         this.stage = stage;
-        this.spritesheet = spriteSheet;
+        // this.spritesheet = spriteSheet;
 
         this.sprite.gotoAndStop("spritesheets/ZombieAlive");
         this.sprite.x = 400;
@@ -33,7 +33,6 @@ export default class Zombie {
         let mouseX:number = this.stage.mouseX;
         let mouseY:number = this.stage.mouseY;
 
-        this.whack =  new createjs.Sprite(this.spritesheet);
         this.whack.gotoAndStop("spritesheets/Whack");
         
         // runs dead animation and removes listener
@@ -62,6 +61,7 @@ export default class Zombie {
 
             createjs.Tween.get(this.whack, {useTicks:true}).to({alpha:0}, 10).call(() => {
                 this.stage.removeChild(this.whack);
+            createjs.Tween.get(this.whack, {useTicks:true}).to({alpha:1}, 0)
             });
 
             // progresses stages of damage
